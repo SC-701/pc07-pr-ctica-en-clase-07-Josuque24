@@ -1,17 +1,15 @@
-// Registro.cshtml.cs
 using Abstracciones.Interfaces.Reglas;
-using Abstracciones.Modelos.Seguridad;
-using Autorizacion.Abstracciones.Modelos;
+using Abstracciones.Seguridad;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Reglas;
 
-namespace Web.Pages.Cuenta
+namespace Web.Pages.Seguridad
 {
     public class RegistroModel : PageModel
     {
         [BindProperty]
-        public Usuario usuario { get; set; } = default!;
+        public Abstracciones.Seguridad.Usuario usuario { get; set; } = default!;
         private IConfiguracion _configuracion;
 
         public RegistroModel(IConfiguracion configuracion)
@@ -24,7 +22,7 @@ namespace Web.Pages.Cuenta
             if (!ModelState.IsValid) return Page();
 
             var hash = Autenticacion.GenerarHash(usuario.Password);
-            usuario.PasswordHash = Autenticacion.ObtenerHash(hash);
+            usuario.Passwordhash = Autenticacion.ObtenerHash(hash);
 
             string endpoint = _configuracion.ObtenerMetodo("ApiEndPointsSeguridad", "Registro");
             var cliente = new HttpClient();

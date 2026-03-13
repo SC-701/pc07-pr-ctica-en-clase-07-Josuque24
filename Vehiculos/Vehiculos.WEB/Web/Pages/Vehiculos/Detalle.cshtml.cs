@@ -8,6 +8,7 @@ using System.Text.Json;
 
 namespace Web.Pages.Vehiculos
 {
+    [Authorize]
     public class DetalleModel : PageModel
     {
         private IConfiguracion _configuracion;
@@ -20,8 +21,8 @@ namespace Web.Pages.Vehiculos
         public async Task OnGet(Guid? id)
         {
             string endpoint = _configuracion.ObtenerMetodo("ApiEndPoints", "ObtenerVehiculo");
-            var cliente = new HttpClient();
-            
+            var cliente = ObtenerClienteConToken();
+
             var solicitud = new HttpRequestMessage(HttpMethod.Get, string.Format(endpoint,id));
             var respuesta = await cliente.SendAsync(solicitud);
             respuesta.EnsureSuccessStatusCode();
@@ -31,6 +32,18 @@ namespace Web.Pages.Vehiculos
                 var opciones = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
                 vehiculo = JsonSerializer.Deserialize<VehiculoResponse>(resultado, opciones);
             }
+        }
+
+        private HttpClient ObtenerClienteConToken()
+        {
+            var tokenClaim = HttpContext.User.Claims
+                .FirstOrDefault(c => c.Type == "Token");
+            var cliente = new HttpClient();
+            if (tokenClaim != null)
+                cliente.DefaultRequestHeaders.Authorization =
+                    new System.Net.Http.Headers.AuthenticationHeaderValue(
+                        "Bearer", tokenClaim.Value);
+            return cliente;
         }
     }
 }
