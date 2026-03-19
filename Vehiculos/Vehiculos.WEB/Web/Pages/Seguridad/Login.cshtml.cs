@@ -57,7 +57,7 @@ namespace Web.Pages.Seguridad
                 if (token.ValidacionExitosa)
                 {
                     // 4. Leer JWT y generar claims para la cookie
-                    JwtSecurityToken? jwtToken = Autenticacion.leerToken(token.AccessToken);
+                     JwtSecurityToken? jwtToken = Autenticacion.leerToken(token.AccessToken);
                     var claims = Autenticacion.GenerarClaims(jwtToken, token.AccessToken);
                     await establecerAutenticacion(claims);
 

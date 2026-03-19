@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Net;
 using System.Text.Json;
 using Reglas;
+using System.Net.Http.Headers;
+using System.Linq;
 
 namespace Web.Pages.Vehiculos
 {
@@ -21,10 +23,10 @@ namespace Web.Pages.Vehiculos
         public async Task OnGet()
         {
             string endpoint = _configuracion.ObtenerMetodo("ApiEndPoints", "ObtenerVehiculos");
-            using var cliente = ObtenerClienteConToken();
+            using var cliente = ObtenerClienteConToken();            
             var solicitud = new HttpRequestMessage(HttpMethod.Get, endpoint);
 
-            var respuesta = await cliente.SendAsync(solicitud);
+            var respuesta = await cliente.SendAsync(solicitud);           
             respuesta.EnsureSuccessStatusCode();
             if (respuesta.StatusCode == HttpStatusCode.OK)
             {
