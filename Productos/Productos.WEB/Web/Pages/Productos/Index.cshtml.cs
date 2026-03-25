@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace Web.Pages.Productos
 {
-    //[Authorize]
+    [Authorize]
     public class IndexModel : PageModel
     {
         private IConfiguracion _configuracion;
