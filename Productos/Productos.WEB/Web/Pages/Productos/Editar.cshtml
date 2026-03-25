@@ -1,0 +1,74 @@
+﻿@page
+@model Web.Pages.Productos.EditarModel
+@{
+}
+<header class="subhead">
+    <div class="container">
+        <div class="masthead-subheading">SC-701: Programación Web Avanzada</div>
+        <div class="masthead-heading text-uppercase">Editar producto</div>
+    </div>
+</header>
+
+<section class="page-section bg-light" id="principal">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">Editar producto</h2>
+            <h3 class="section-subheading text-muted">Modifique la información del producto.</h3>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <form method="post">
+                    <input type="hidden" asp-for="producto.Id" />
+
+                    <div class="form-group mb-3">
+                        <label asp-for="producto.Nombre" class="control-label"></label>
+                        <input asp-for="producto.Nombre" class="form-control" />
+                        <span asp-validation-for="producto.Nombre" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="producto.Descripcion" class="control-label"></label>
+                        <textarea asp-for="producto.Descripcion" class="form-control"></textarea>
+                        <span asp-validation-for="producto.Descripcion" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="producto.Precio" class="control-label"></label>
+                        <input asp-for="producto.Precio" class="form-control" />
+                        <span asp-validation-for="producto.Precio" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="producto.Stock" class="control-label"></label>
+                        <input asp-for="producto.Stock" class="form-control" />
+                        <span asp-validation-for="producto.Stock" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="producto.CodigoBarras" class="control-label"></label>
+                        <input asp-for="producto.CodigoBarras" class="form-control" />
+                        <span asp-validation-for="producto.CodigoBarras" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="IdSubCategoria" class="control-label">Subcategoría</label>
+                        <select asp-for="IdSubCategoria" asp-items="Model.SubCategorias" class="form-control">
+                            <option value="">Seleccione una subcategoría</option>
+                        </select>
+                        <span asp-validation-for="IdSubCategoria" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <a class="btn btn-primary" asp-page="./Index">Cancelar</a>
+                        <button type="submit" class="btn btn-warning">Guardar cambios</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

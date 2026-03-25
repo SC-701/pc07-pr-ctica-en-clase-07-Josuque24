@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Productos",
+    "\\Productos\\Producto.API",
+    "\\Productos\\Producto.API\\Flujo"
   ],
+  "SelectedNode": "\\Productos\\Producto.API\\Flujo\\ProductoFlujo.cs",
   "PreviewInSolutionExplorer": false
 }
